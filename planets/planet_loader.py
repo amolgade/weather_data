@@ -18,11 +18,15 @@ _WEATHER_CONTROLLERS = []
 
 
 def getAllPlanets():
-  """A generator to create and returns a planet from the all_data.json file."""
+  """A generator to create and yield a planet.
+  
+  All data required to create a planet object comes from the all_data.json file.
+  """
   # Load entire all_data.json.
   all_data = data_reader.GetAllData()
   for planet_data in all_data['planets']:
     # Create planets and weather controller objects.
+    # These are created using their respective factory methods.
     planet = planets.createPlanet(planet_data)
     weather_controller = controllers.createWeatherController(
         planet_data['base_weather'], planet_data['weather_decorators'])
@@ -45,4 +49,3 @@ if __name__ != '__main__':
   from controllers import controllers
   from data_reader import data_reader
   from location import location
-
