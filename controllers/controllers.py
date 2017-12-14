@@ -7,7 +7,7 @@ a weather change happens at a fixed interval.
 This module also has an astract base class that serves as a decorator
 for the base weather controller. A series of decorators can be added
 on top of a base weather. For example, for a periodic base weather
-one can add decortors like rain, hurricane, thunderstorm etc.
+one can add decorators like rain, hurricane, thunderstorm etc.
 
 As well contains a Factory Method "createWeatherController" to create a
 weather controller instance based in the base_weather and weather_decorators
