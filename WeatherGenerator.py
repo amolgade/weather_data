@@ -1,8 +1,8 @@
-"""This module prints weather report on STDOUT a given number of times.
+"""This module prints weather report on STDOUT a given number of times every 6 seconds.
 
-The file all_data.json mentions all data required to run this weather simulation.
+The file all_data.json captures all data required to run this weather simulation.
 
-The planet_loader module yields planets from the all_data.json file.
+The planet_loader module yields planet objects as mentioned in all_data.json file.
 A planet object has a report() function to print its current weather conditions
 on a fixed set of locations. The output weather conditions differ with each call
 to the planet.report() function.
@@ -14,14 +14,13 @@ This will result in getting current weather data displayed 20 times by default.
 
 To display weather data 50 times, invoke this module as:-
 python WeatherGenerator.py 50
-
-To continue, hit <Enter>
 """
 import sys
 import time
 
 def _main(arg):
   print __doc__
+  print 'To continue, hit <Enter>'
   raw_input()
   try:
    for planet in planet_loader.getAllPlanets():
