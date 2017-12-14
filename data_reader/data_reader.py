@@ -71,14 +71,14 @@ class DataReader(threading.Thread):
     self.__should_read = False
 
 
-# Below are the APIs that this module provides to fetch data from all_data.json.
 def shutdown():
-  """Shuts the DataReader thread down and sets the right event."""
+  """Shuts the DataReader thread down and sets the shutdown event."""
   global _DATA_READER
   if _DATA_READER is not None:
     _DATA_READER.close()
     _DATA_READER_SHUTDOWN.wait()
 
+# Below are the APIs that this module provides to fetch data from all_data.json.
 def GetAllData():
   """Returns entire data in all_data.json file."""
   global _DATA_READER, _SINGLETON_LOCK
@@ -152,4 +152,3 @@ def GetZone(location, planet):
     else:
       raise DataReaderError('Cannot determine zone for location: %s', location)
   
-
