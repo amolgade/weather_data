@@ -35,6 +35,7 @@ class Location(object):
     self.__humidity = None
     self.__season = None
     self.__timezone = None
+    self.__elevation = None
 
   def getCurrentTimeAsString(self):
     """Returns current local time at this location."""
@@ -76,7 +77,7 @@ class Location(object):
     return self.__name
  
   def getTemperature(self):
-    if self.__temperature != 0:
+    if self.__temperature:
       temperature = '%.1f' % self.__temperature
       if float(temperature) > 0:
         temperature = '+' + temperature
@@ -126,4 +127,3 @@ class Location(object):
   season = property(getSeason, setSeason)
   timezone = property(getTimezone, setTimezone)
   elevation = property(getElevation, setElevation)
-
