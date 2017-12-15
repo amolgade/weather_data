@@ -12,7 +12,8 @@ class LocationUnitTester(unittest.TestCase):
 
   def test_getPosition(self):
     test_location = Location(latitude=0, longitude=0.0)
-    self.assertEqual(test_location.getPosition(), '0,0.0')
+    test_location.elevation = 50
+    self.assertEqual(test_location.getPosition(), '0,0.0,50')
 
   def test_property_latitude(self):
     test_location = Location(latitude=80.0, longitude=0.0)
@@ -26,7 +27,7 @@ class LocationUnitTester(unittest.TestCase):
     test_location = Location(latitude=0.0, longitude=0.0)
     self.assertIsNone(test_location.temperature)
     test_location.temperature = 40
-    self.assertEqual(test_location.temperature, 40)
+    self.assertEqual(test_location.temperature, '+40.0')
 
   def test_string_output(self):
     """Tests the output of an str() call on a location."""
@@ -34,7 +35,10 @@ class LocationUnitTester(unittest.TestCase):
       return 'YYYY-DD-MM'
     test_location = Location(latitude=0.0, longitude=0.0, name='test_location')
     test_location.getCurrentTimeAsString = mock_current_time
-    self.assertEqual(str(test_location), 'test_location|0.0,0.0|None|None|None|None|YYYY-DD-MM')
+    test_location.temperature = 100
+    test_location.pressure = 1000
+    test_location.humidity = 4
+    self.assertEqual(str(test_location), 'test_location|0.0,0.0,None|YYYY-DD-MM|None|+100.0|1000.0|4')
 
 
 if __name__ == '__main__':
