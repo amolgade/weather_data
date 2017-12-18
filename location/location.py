@@ -39,6 +39,8 @@ class Location(object):
 
   def getCurrentTimeAsString(self):
     """Returns current local time at this location."""
+    if self.__timezone is None:
+      return str(self.__timezone)
     timedelta = float(self.__timezone.split('UTC')[1])
     dt = datetime.datetime.now(tz=FixedOffset(timedelta))
     return '%sT%sZ' % (dt.strftime('%Y-%m-%d'), dt.strftime('%T'))
@@ -64,7 +66,11 @@ class Location(object):
   
   def __str__(self):
     """Returns the location details in a way a planet's report() API expects."""
-    return '|'.join(str(p) for p in [self.name, self.getPosition(), self.getCurrentTimeAsString(), self.season, self.temperature, self.pressure, self.humidity])
+    attributes = [self.name, self.getPosition(),
+                  self.getCurrentTimeAsString(),
+                  self.season, self.getTemperatureAsString(),
+                  self.getPressureAsString(), self.humidity]
+    return '|'.join(str(p) for p in attributes)
 
   # Additional properties for the Location class.
   def getLatitude(self):
@@ -76,19 +82,27 @@ class Location(object):
   def getName(self):
     return self.__name
  
-  def getTemperature(self):
+  def getTemperatureAsString(self):
     if self.__temperature:
       temperature = '%.1f' % self.__temperature
       if float(temperature) > 0:
         temperature = '+' + temperature
       return temperature
+    return str(self.__temperature)
+
+  def getTemperature(self):
     return self.__temperature
 
   def setTemperature(self, temperature):
     self.__temperature = temperature
 
+  def getPressureAsString(self):
+    if self.__pressure:
+      return '%.1f' % self.__pressure
+    return str(self.__pressure)
+
   def getPressure(self):
-    return '%.1f' % self.__pressure
+    return self.__pressure
 
   def setPressure(self, pressure):
     self.__pressure = pressure
