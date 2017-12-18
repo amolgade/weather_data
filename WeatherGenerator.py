@@ -36,9 +36,8 @@ if __name__ == '__main__':
   times = sys.argv[1] if len(sys.argv) > 1 else 20
   try:
     times = int(times)
-  except ValueError:
+  except (ValueError, TypeError):
     print 'Invalid argument \'%s\'. Please specify a number.' % sys.argv[1]
   else:
     from planets import planet_loader
     _main(times)
-
