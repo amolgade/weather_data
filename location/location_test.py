@@ -88,7 +88,7 @@ class LocationUnitTester(unittest.TestCase):
     self.assertEqual(test_location.longitude, 0.0)
 
   def test_GetCurrentTimeAsString(self):
-    time_regex = r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z'
+    time_regex = r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$'
     self.assertEqual(self._test_location.getCurrentTimeAsString(), 'None')
     self._test_location.timezone = 'UTC+8'
     self.assertTrue(re.match(time_regex, self._test_location.getCurrentTimeAsString()))
